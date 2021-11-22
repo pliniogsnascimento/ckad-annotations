@@ -7,7 +7,7 @@ Env variables are a list inside containers definition:
 ```yaml
 env:
 - name: APP_COLOR
-	value: pink
+    value: pink
 - name: APP_COLOR_2
 	valueFrom:
 		configMapKeyRef:
@@ -39,7 +39,7 @@ data:
     APP_MOD: prod
 ```
 
-Inject configMap data:
+Inject configMap data into pods:
 ```yaml
 # Env
 apiVersion: v1
@@ -58,7 +58,7 @@ spec:
     - configMapRef:
         name: app-config
 ---
-# Single env
+# Single env from configmap
 apiVersion: v1
 kind: Pod
 metadata:
@@ -78,7 +78,6 @@ spec:
             name: app-config
             key: APP_COLOR
 ---
-# Single env
 apiVersion: v1
 kind: Pod
 metadata:
@@ -92,10 +91,10 @@ spec:
     ports:
     - containerPort: 8080
     envFrom:
-    volumes:
-    - name: app-config-volume
-      configMap:
-        name: app-config
+        volumes:
+        - name: app-config-volume
+        configMap:
+            name: app-config
 ```
 
 ### Secrets
