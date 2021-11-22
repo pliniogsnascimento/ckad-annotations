@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  APP_COLOR: green
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: app-color-green

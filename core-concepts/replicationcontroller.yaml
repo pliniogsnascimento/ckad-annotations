@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    app: nginx
+  name: nginx
+spec:
+  replicas: 3
+  # Only works with set based selectors, can use expressions. Use in replicaset
+  # selector:
+  #  matchLabels:
+  #    tier: frontend
+  selector:
+    tier: frontend
+  template:
+    metadata:
+      labels:
+        app: nginx
+        tier: frontend
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        resources: {}
+        ports:
+        - containerPort: 80
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      # restartPolicy: Never - Does not work
