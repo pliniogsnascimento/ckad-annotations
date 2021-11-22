@@ -4,6 +4,6 @@ This repo contains my personal annotations for Certified Kubernetes Application 
 
 My intention is to get Certified Kubernetes Administrator certification, and this is the first step to get there.
 
-# Organization
+### Organization
 
 This repo is organized by the concepts os the certification, each one containing yaml examples.
