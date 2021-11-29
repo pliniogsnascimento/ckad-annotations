@@ -243,3 +243,53 @@ spec:
     effect: NoSchedule
 ```
 [Toleration docs](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#toleration-v1-core)
+
+### Node selectors
+Label nodes
+```bash
+kubectl label nodes <node-name> <key>=<value>
+```
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: mypod
+  name: mypod
+spec:
+  containers:
+  - image: nginx
+    name: mypod
+  nodeSelector:
+    size: Large
+```
+Obs: It cannot match multi labels, for this, use NodeAffinity and NodeAntiAffinity
+
+### NodeAffinity
+Pod with nodeAffinity:
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: mypod
+  name: mypod
+spec:
+  containers:
+  - image: nginx
+    name: mypod
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: Size
+            operator: In # Also NotIn and Exists
+	    values: # Exists doesn't have values section
+            - Large
+            - Medium
+    size: Large
+```
+Node affinity types can be: `requiredDuringSchedulingIgnoredDuringExecution`, `preferredDuringSchedulingIgnoredDuringExecution` and `requiredDuringSchedulingRequiredDuringExecution`. [Affinity Docs](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#affinity-v1-core)
+
