@@ -76,3 +76,29 @@ spec:
       - cat
       - /app/is_ready
 ```
+
+### Liveness Probe
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: simple-webapp-color
+  name: simple-webapp-color
+spec:
+  containers:
+  - image: simple-webapp-color
+    name: simple-webapp-color
+    ports:
+    - containerPort: 8080
+  livenessProbe:
+    httpGet:
+      path: /api/ready
+      port: 8080
+    initialDelaySeconds: 10s
+    periodSeconds: 5
+    failureThreshold: 8
+```
+
+kodekloud/webapp-delayed-start

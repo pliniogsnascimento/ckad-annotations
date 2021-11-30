@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: mongodb
+    tier: db
+    bu: person
+  name: person-mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+      tier: db
+      bu: person
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: mongodb
+        tier: db
+        bu: person
+    spec:
+      containers:
+      - image: mongo
+        name: mongo
+        resources: {}
+status: {}

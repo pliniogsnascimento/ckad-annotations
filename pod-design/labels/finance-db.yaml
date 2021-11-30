@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: mongodb
+    tier: db
+    bu: finance
+  name: finance-mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+      tier: db
+      bu: finance
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: mongodb
+        tier: db
+        bu: finance
+    spec:
+      containers:
+      - image: mongo
+        name: mongo
+        resources: {}
+status: {}
